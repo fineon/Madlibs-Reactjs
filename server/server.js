@@ -1,5 +1,7 @@
 const express = require('express');
 const app=express();
+const axios = require('axios');
+const path = require('path');
 
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,7 +12,24 @@ app.use((req,res,next)=>{
 
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
+
 const data = require('./data.json');
+
+app.get('/madlibs',(req,res)=>{
+    axios.get('http://madlibz.herokuapp.com/api/random?maxlength=15')
+      .then(item => {
+        //   console.log(item)
+          res.send(item.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+});
 
 app.get('/words/:type', (req,res)=>{
     const typeObject=data.find(item=>item.type === req.params.type)

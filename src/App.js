@@ -14,10 +14,10 @@ class App extends Component {
     loadedSuggestions: false
   }
 
+  // http://madlibz.herokuapp.com/api/random?maxlength=15
   componentDidMount() {
-    axios.get('http://madlibz.herokuapp.com/api/random?maxlength=15')
+    axios.get('http://localhost:8080/madlibs')
       .then(item => {
-
         this.setState({ data: item.data })
         console.log(this.state.data)
       })

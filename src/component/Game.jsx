@@ -1,7 +1,6 @@
 import React from "react";
 import "./Start.scss";
 import "./Game.scss";
-import axios from 'axios';
 
 export default function Game({ story, readStory, audioFile, fullStory, makeSuggestions, suggestions, suggestionsMade, startOver }) {
   console.log(suggestions)
